@@ -1,1 +1,15 @@
-const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('#nav');if(toggle&&nav){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open))});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}))}const year=document.querySelector('#year');if(year)year.textContent=new Date().getFullYear();
+'use strict';
+const menu = document.querySelector('.menu');
+const navigation = document.querySelector('#navigation');
+function closeMenu() {
+  navigation?.classList.remove('open');
+  menu?.setAttribute('aria-expanded', 'false');
+}
+menu?.addEventListener('click', () => {
+  const open = navigation.classList.toggle('open');
+  menu.setAttribute('aria-expanded', String(open));
+});
+navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+const year = document.querySelector('#year');
+if (year) year.textContent = String(new Date().getFullYear());
